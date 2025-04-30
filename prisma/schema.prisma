@@ -1,0 +1,341 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Branch {
+  id        String        @id @default(cuid())
+  name      String
+  code      String        @unique
+  address   String?
+  city      String?
+  state     String?
+  country   String?
+  phone     String?
+  email     String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  order     Int           @default(0)
+  classes   Class[]
+  employees Employee[]
+  students  Student[]
+  teachers  Teacher[]
+  routes    TransportRoute[]
+  attendanceLocations AttendanceLocation[]
+}
+
+model Student {
+  id                   String                @id @default(cuid())
+  admissionNumber      String                @unique
+  firstName            String
+  lastName             String
+  dateOfBirth          DateTime
+  gender               String
+  address              String?
+  phone                String?
+  email                String?
+  personalEmail        String?
+  bloodGroup           String?
+  religion             String?
+  nationality          String?
+  caste                String?
+  aadharNumber         String?
+  udiseId              String?
+  joinDate             DateTime              @default(now())
+  dateOfAdmission      DateTime?
+  rollNumber           String?
+  isActive             Boolean               @default(true)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  branchId             String
+  parentId             String?
+  classId              String?
+  username             String?
+  password             String?
+  clerkId              String?               // Clerk auth user ID
+  // Address fields
+  permanentAddress     String?
+  permanentCity        String?
+  permanentState       String?
+  permanentCountry     String?
+  permanentZipCode     String?
+  correspondenceAddress String?
+  correspondenceCity   String?
+  correspondenceState  String?
+  correspondenceCountry String?
+  correspondenceZipCode String?
+  // Previous school information
+  previousSchool       String?
+  lastClassAttended    String?
+  mediumOfInstruction  String?
+  recognisedByStateBoard Boolean?
+  schoolCity           String?
+  schoolState          String?
+  reasonForLeaving     String?
+  academicRecords      AcademicRecord[]
+  branch               Branch                @relation(fields: [branchId], references: [id])
+  class                Class?                @relation(fields: [classId], references: [id])
+  parent               Parent?               @relation(fields: [parentId], references: [id])
+  transferCertificates TransferCertificate[]
+  transportAssignments TransportAssignment[]
+  // Sibling relationships
+  siblings             StudentSibling[]      @relation("StudentToSibling")
+  siblingOf            StudentSibling[]      @relation("SiblingToStudent")
+  // Attendance records
+  attendanceRecords    StudentAttendance[]
+}
+
+model Parent {
+  id                String    @id @default(cuid())
+  // Father information
+  fatherName        String?
+  fatherDob         DateTime?
+  fatherEducation   String?
+  fatherOccupation  String?
+  fatherMobile      String?
+  fatherEmail       String?
+  // Mother information
+  motherName        String?
+  motherDob         DateTime?
+  motherEducation   String?
+  motherOccupation  String?
+  motherMobile      String?
+  motherEmail       String?
+  // Guardian information
+  guardianName        String?
+  guardianDob         DateTime?
+  guardianEducation   String?
+  guardianOccupation  String?
+  guardianMobile      String?
+  guardianEmail       String?
+  // Additional information
+  parentAnniversary DateTime?
+  monthlyIncome     String?
+  clerkId           String?   // Clerk auth user ID
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  students          Student[]
+}
+
+model Teacher {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  qualification  String?
+  specialization String?
+  joinDate       DateTime @default(now())
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String?  @unique
+  branchId       String
+  employeeCode   String?  @unique
+  classes        Class[]
+  branch         Branch   @relation(fields: [branchId], references: [id])
+  attendances    StaffAttendance[]
+}
+
+model Employee {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  designation String
+  department  String?
+  joinDate    DateTime @default(now())
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String?  @unique
+  branchId    String
+  branch      Branch   @relation(fields: [branchId], references: [id])
+}
+
+model Class {
+  id        String          @id @default(cuid())
+  name      String
+  section   String
+  capacity  Int             @default(30)
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  branchId  String
+  teacherId String?
+  sessionId String
+  branch    Branch          @relation(fields: [branchId], references: [id])
+  session   AcademicSession @relation(fields: [sessionId], references: [id])
+  teacher   Teacher?        @relation(fields: [teacherId], references: [id])
+  students  Student[]
+  attendanceRecords StudentAttendance[]
+}
+
+model AcademicSession {
+  id              String           @id @default(cuid())
+  name            String
+  startDate       DateTime
+  endDate         DateTime
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  academicRecords AcademicRecord[]
+  classes         Class[]
+}
+
+model AcademicRecord {
+  id        String          @id @default(cuid())
+  studentId String
+  sessionId String
+  classId   String?
+  status    String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  session   AcademicSession @relation(fields: [sessionId], references: [id])
+  student   Student         @relation(fields: [studentId], references: [id])
+}
+
+model TransferCertificate {
+  id        String   @id @default(cuid())
+  tcNumber  String   @unique
+  issueDate DateTime @default(now())
+  reason    String?
+  remarks   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id])
+}
+
+model StudentSibling {
+  id              String   @id @default(cuid())
+  relationshipType String
+  createdAt       DateTime @default(now())
+
+  // Student who has the sibling
+  studentId       String
+  student         Student  @relation("StudentToSibling", fields: [studentId], references: [id], onDelete: Cascade)
+
+  // The sibling
+  siblingId       String
+  sibling         Student  @relation("SiblingToStudent", fields: [siblingId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, siblingId])
+}
+
+model TransportRoute {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  branchId    String
+  branch      Branch          @relation(fields: [branchId], references: [id])
+  stops       TransportStop[]
+}
+
+model TransportStop {
+  id          String                @id @default(cuid())
+  name        String
+  address     String?
+  distance    Float?
+  fee         Float
+  sequence    Int
+  isActive    Boolean               @default(true)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  routeId     String
+  assignments TransportAssignment[]
+  route       TransportRoute        @relation(fields: [routeId], references: [id], onDelete: Cascade)
+}
+
+model TransportAssignment {
+  id        String        @id @default(cuid())
+  startDate DateTime      @default(now())
+  endDate   DateTime?
+  isActive  Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  studentId String
+  stopId    String
+  stop      TransportStop @relation(fields: [stopId], references: [id])
+  student   Student       @relation(fields: [studentId], references: [id])
+}
+
+// Attendance location model for location-based attendance tracking
+model AttendanceLocation {
+  id          String   @id @default(cuid())
+  name        String
+  latitude    Float
+  longitude   Float
+  radius      Int      // Radius in meters
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  branchId    String
+  branch      Branch   @relation(fields: [branchId], references: [id])
+  attendances StaffAttendance[]
+}
+
+// Staff attendance records model
+model StaffAttendance {
+  id                  String             @id @default(cuid())
+  timestamp           DateTime           @default(now())
+  latitude            Float
+  longitude           Float
+  distance            Int                // Distance from the location in meters
+  isWithinAllowedArea Boolean            @default(false)
+  notes               String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  
+  // The location where attendance was marked
+  locationId          String
+  location            AttendanceLocation @relation(fields: [locationId], references: [id])
+  
+  // Staff can be either a teacher or an employee
+  teacherId           String?
+  teacher             Teacher?           @relation(fields: [teacherId], references: [id])
+  
+  employeeId          String?
+  employee            Employee?          @relation(fields: [employeeId], references: [id])
+  
+  // Ensure that either teacherId or employeeId is present, but not both
+  @@check(
+    ((teacherId IS NOT NULL) AND (employeeId IS NULL)) OR
+    ((employeeId IS NOT NULL) AND (teacherId IS NULL))
+  )
+}
+
+// Student attendance model for tracking student attendance
+model StudentAttendance {
+  id                String            @id @default(cuid())
+  date              DateTime          @default(now())
+  status            AttendanceStatus  @default(PRESENT)
+  reason            String?           // For absence or late arrival
+  notes             String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  // Relations
+  studentId         String
+  student           Student           @relation(fields: [studentId], references: [id])
+  classId           String
+  class             Class             @relation(fields: [classId], references: [id])
+  markedById        String?           // Teacher or employee who marked attendance
+  
+  @@unique([studentId, date])
+  @@index([date, classId])
+  @@index([studentId, date])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+  EXCUSED
+}
