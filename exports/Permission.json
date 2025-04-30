@@ -1,1 +1,33 @@
-[]
+
+[
+  {
+    "id": "perm_view_students",
+    "name": "View Students",
+    "description": "Can view student records"
+  },
+  {
+    "id": "perm_edit_students",
+    "name": "Edit Students",
+    "description": "Can edit student records"
+  },
+  {
+    "id": "perm_view_teachers",
+    "name": "View Teachers",
+    "description": "Can view teacher records"
+  },
+  {
+    "id": "perm_edit_teachers",
+    "name": "Edit Teachers",
+    "description": "Can edit teacher records"
+  },
+  {
+    "id": "perm_manage_classes",
+    "name": "Manage Classes",
+    "description": "Can manage class records"
+  },
+  {
+    "id": "perm_view_reports",
+    "name": "View Reports",
+    "description": "Can view school reports"
+  }
+]

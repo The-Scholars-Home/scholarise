@@ -1,1 +1,33 @@
-[]
+
+[
+  {
+    "id": "class_001",
+    "name": "Grade 1",
+    "section": "A",
+    "capacity": 30,
+    "branchId": "branch_001",
+    "teacherId": "teacher_001",
+    "sessionId": "session_2024",
+    "isActive": true
+  },
+  {
+    "id": "class_002",
+    "name": "Grade 2",
+    "section": "B",
+    "capacity": 25,
+    "branchId": "branch_001",
+    "teacherId": "teacher_002",
+    "sessionId": "session_2024",
+    "isActive": true
+  },
+  {
+    "id": "class_003",
+    "name": "Grade 3",
+    "section": "A",
+    "capacity": 28,
+    "branchId": "branch_002",
+    "teacherId": "teacher_003",
+    "sessionId": "session_2024",
+    "isActive": true
+  }
+]

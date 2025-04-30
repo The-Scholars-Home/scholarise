@@ -1,3 +1,4 @@
+
 import { FlatCompat } from "@eslint/eslintrc";
 import tseslint from "typescript-eslint";
 
@@ -34,6 +35,9 @@ export default tseslint.config(
         { checksVoidReturn: { attributes: false } },
       ],
     },
+    parserOptions: {
+      project: "./tsconfig.json",
+    },
   },
   {
     linterOptions: {
@@ -41,7 +45,7 @@ export default tseslint.config(
     },
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        project: true,
       },
     },
   },

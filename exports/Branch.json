@@ -1,1 +1,27 @@
-[]
+
+[
+  {
+    "id": "branch_001",
+    "name": "Main Campus",
+    "code": "MAIN",
+    "address": "123 Education Street",
+    "city": "Knowledge City",
+    "state": "Learning State",
+    "country": "Education Nation",
+    "phone": "+1234567890",
+    "email": "main@scholarise.edu",
+    "order": 1
+  },
+  {
+    "id": "branch_002",
+    "name": "Secondary Campus",
+    "code": "SEC",
+    "address": "456 School Avenue",
+    "city": "Academic City",
+    "state": "Education State",
+    "country": "Education Nation",
+    "phone": "+1987654321",
+    "email": "secondary@scholarise.edu",
+    "order": 2
+  }
+]

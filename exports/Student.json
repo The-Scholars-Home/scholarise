@@ -1,1 +1,44 @@
-[]
+
+[
+  {
+    "id": "student_001",
+    "admissionNumber": "ST20240001",
+    "firstName": "Alex",
+    "lastName": "Wilson",
+    "gender": "Male",
+    "dateOfBirth": "2015-05-10",
+    "email": "alex.w@scholarise.edu",
+    "phone": "+1234567895",
+    "branchId": "branch_001",
+    "classId": "class_001",
+    "parentId": "parent_001",
+    "isActive": true
+  },
+  {
+    "id": "student_002",
+    "admissionNumber": "ST20240002",
+    "firstName": "Emma",
+    "lastName": "Brown",
+    "gender": "Female",
+    "dateOfBirth": "2015-08-15",
+    "email": "emma.b@scholarise.edu",
+    "phone": "+1234567896",
+    "branchId": "branch_001",
+    "classId": "class_001",
+    "parentId": "parent_002",
+    "isActive": true
+  },
+  {
+    "id": "student_003",
+    "admissionNumber": "ST20240003",
+    "firstName": "Oliver",
+    "lastName": "Davis",
+    "gender": "Male",
+    "dateOfBirth": "2014-11-20",
+    "email": "oliver.d@scholarise.edu",
+    "phone": "+1234567897",
+    "branchId": "branch_002",
+    "classId": "class_003",
+    "isActive": true
+  }
+]

@@ -1,1 +1,23 @@
-[]
+
+[
+  {
+    "id": "ur_001",
+    "userId": "user_001",
+    "roleId": "role_admin"
+  },
+  {
+    "id": "ur_002",
+    "userId": "user_002",
+    "roleId": "role_teacher"
+  },
+  {
+    "id": "ur_003",
+    "userId": "user_003",
+    "roleId": "role_student"
+  },
+  {
+    "id": "ur_004",
+    "userId": "user_004",
+    "roleId": "role_parent"
+  }
+]

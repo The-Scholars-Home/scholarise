@@ -1,1 +1,28 @@
-[]
+
+[
+  {
+    "id": "role_admin",
+    "name": "Admin",
+    "description": "Administrator with full access"
+  },
+  {
+    "id": "role_teacher",
+    "name": "Teacher",
+    "description": "School teaching staff"
+  },
+  {
+    "id": "role_student",
+    "name": "Student",
+    "description": "Enrolled student"
+  },
+  {
+    "id": "role_parent",
+    "name": "Parent",
+    "description": "Parent or guardian of student"
+  },
+  {
+    "id": "role_staff",
+    "name": "Staff",
+    "description": "Non-teaching school staff"
+  }
+]

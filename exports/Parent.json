@@ -1,1 +1,25 @@
-[]
+
+[
+  {
+    "id": "parent_001",
+    "fatherName": "James Wilson",
+    "fatherEmail": "james.wilson@example.com",
+    "fatherMobile": "+1234567891",
+    "fatherOccupation": "Engineer",
+    "motherName": "Sarah Wilson",
+    "motherEmail": "sarah.wilson@example.com",
+    "motherMobile": "+1234567892",
+    "motherOccupation": "Doctor"
+  },
+  {
+    "id": "parent_002",
+    "fatherName": "Michael Brown",
+    "fatherEmail": "michael.brown@example.com",
+    "fatherMobile": "+1234567893",
+    "fatherOccupation": "Accountant",
+    "motherName": "Jessica Brown",
+    "motherEmail": "jessica.brown@example.com",
+    "motherMobile": "+1234567894",
+    "motherOccupation": "Teacher"
+  }
+]

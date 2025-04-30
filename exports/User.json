@@ -1,1 +1,27 @@
-[]
+
+[
+  {
+    "id": "user_001",
+    "email": "admin@scholarise.edu",
+    "name": "Admin User",
+    "role": "role_admin"
+  },
+  {
+    "id": "user_002",
+    "email": "teacher@scholarise.edu",
+    "name": "John Teacher",
+    "role": "role_teacher"
+  },
+  {
+    "id": "user_003",
+    "email": "student@scholarise.edu",
+    "name": "Student User",
+    "role": "role_student"
+  },
+  {
+    "id": "user_004",
+    "email": "parent@scholarise.edu",
+    "name": "Parent User",
+    "role": "role_parent"
+  }
+]
